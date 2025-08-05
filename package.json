@@ -1,0 +1,16 @@
+{
+  "name": "qa-dojo-api-course",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "Myloslava",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "newman run postman/nasa.postman_collection.json -r htmlextra"
+  },
+  "dependencies": {
+    "newman": "^6.2.1",
+    "newman-reporter-htmlextra": "^1.23.1"
+  }
+}

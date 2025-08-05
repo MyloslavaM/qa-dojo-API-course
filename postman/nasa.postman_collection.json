@@ -1,0 +1,556 @@
+{
+	"info": {
+		"_postman_id": "979c9e6a-2625-4171-8057-9942b7455593",
+		"name": "nasa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16777111"
+	},
+	"item": [
+		{
+			"name": "date parameter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);   })",
+							"",
+							"",
+							"pm.test(\"Status code is OK\", function () {",
+							"    pm.response.to.have.status('OK')",
+							"})",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"})",
+							"pm.test('X-Ratelimit-Limit header exist', function (){",
+							"    pm.response.to.have.header('X-Ratelimit-Limit')",
+							"})",
+							"",
+							"pm.test('X-Ratelimit-Limit header has value true', function (){",
+							"    pm.expect(pm.response.headers.get('X-Ratelimit-Limit')).to.eql('4000')",
+							"})",
+							"",
+							"pm.test('json body has copyright data', function (){",
+							"    const json = pm.response.json();",
+							"    pm.expect(json.copyright).to.eql('Peter Bresseler');",
+							"    pm.expect(json.date).to.eql('2025-08-01');",
+							"})",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "JzaeM8dMrWZzUG3ZdpLQa2epUNbO13aSFosayUY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/planetary/apod?api_key={{token}}&date=2025-08-01",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"planetary",
+						"apod"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{token}}"
+						},
+						{
+							"key": "date",
+							"value": "2025-08-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "date + thumbs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);   })",
+							"",
+							"",
+							"pm.test(\"Status code is OK\", function () {",
+							"    pm.response.to.have.status('OK')",
+							"})",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"})",
+							"pm.test('X-Ratelimit-Limit header exist', function (){",
+							"    pm.response.to.have.header('X-Ratelimit-Limit')",
+							"})",
+							"",
+							"pm.test('X-Ratelimit-Limit header has value true', function (){",
+							"    pm.expect(pm.response.headers.get('X-Ratelimit-Limit')).to.eql('4000')",
+							"})",
+							"",
+							"pm.test('json body has copyright data', function (){",
+							"    const json = pm.response.json();",
+							"    pm.expect(json.title).to.eql('Milky Way and Exploding Meteor');",
+							"    pm.expect(json.date).to.eql('2025-08-03');",
+							"})",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "JzaeM8dMrWZzUG3ZdpLQa2epUNbO13aSFosayUY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/planetary/apod?api_key={{token}}&thumbs=true",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"planetary",
+						"apod"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{token}}"
+						},
+						{
+							"key": "date",
+							"value": "2025-08-01",
+							"disabled": true
+						},
+						{
+							"key": "thumbs",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "starts + end dates",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"pm.test(\"Status code is OK\", function () {",
+							"    pm.expect(pm.response.status).to.equal('OK');",
+							"});",
+							"",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							"",
+							"pm.test('X-Ratelimit-Limit header exists', function (){",
+							"    pm.expect(pm.response.headers.has('X-Ratelimit-Limit')).to.be.true;",
+							"});",
+							"",
+							"pm.test('X-Ratelimit-Limit header has correct value', function (){",
+							"    pm.expect(pm.response.headers.get('X-Ratelimit-Limit')).to.eql('4000');",
+							"});",
+							"",
+							"pm.test('JSON body has valid data', function (){",
+							"    const json = pm.response.json();",
+							"    pm.expect(json).to.be.an('array').that.is.not.empty;",
+							"    json.forEach(item => {",
+							"        pm.expect(item).to.have.property('copyright');",
+							"        pm.expect(item).to.have.property('date');",
+							"        pm.expect(item).to.have.property('title');",
+							"        pm.expect(item).to.have.property('url');",
+							"        pm.expect(item).to.have.property('media_type');",
+							"    });",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "JzaeM8dMrWZzUG3ZdpLQa2epUNbO13aSFosayUY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/planetary/apod?start_date=2025-08-01&end_date=2025-08-03",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"planetary",
+						"apod"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2025-08-01"
+						},
+						{
+							"key": "end_date",
+							"value": "2025-08-03"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "count",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);   })",
+							"",
+							"",
+							"pm.test(\"Status code is OK\", function () {",
+							"    pm.response.to.have.status('OK')",
+							"})",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"})",
+							"pm.test('X-Ratelimit-Limit header exist', function (){",
+							"    pm.response.to.have.header('X-Ratelimit-Limit')",
+							"})",
+							"",
+							"pm.test('X-Ratelimit-Limit header has value true', function (){",
+							"    pm.expect(pm.response.headers.get('X-Ratelimit-Limit')).to.eql('4000')",
+							"})",
+							"",
+							"pm.test('json body has 5 items', function () {",
+							"    const json = pm.response.json();",
+							"    pm.expect(json.length).to.eql(5)",
+							"   ",
+							"})",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "JzaeM8dMrWZzUG3ZdpLQa2epUNbO13aSFosayUY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/planetary/apod?api_key={{token}}&count=5",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"planetary",
+						"apod"
+					],
+					"query": [
+						{
+							"key": "api_key",
+							"value": "{{token}}"
+						},
+						{
+							"key": "count",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "starts day only",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);   })",
+							"",
+							"",
+							"pm.test(\"Status code is OK\", function () {",
+							"    pm.response.to.have.status('OK')",
+							"})",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"})",
+							"pm.test('X-Ratelimit-Limit header exist', function (){",
+							"    pm.response.to.have.header('X-Ratelimit-Limit')",
+							"})",
+							"",
+							"pm.test('X-Ratelimit-Limit header has value true', function (){",
+							"    pm.expect(pm.response.headers.get('X-Ratelimit-Limit')).to.eql('4000')",
+							"})",
+							"",
+							"pm.test('json body has copyright data', function (){",
+							"    const json = pm.response.json();",
+							"    pm.expect(json.title).to.eql('Milky Way and Exploding Meteor');",
+							"    pm.expect(json.date).to.eql('2025-08-03');",
+							"})",
+							"",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "JzaeM8dMrWZzUG3ZdpLQa2epUNbO13aSFosayUY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/planetary/apod?start_date=2024-08-01",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"planetary",
+						"apod"
+					],
+					"query": [
+						{
+							"key": "start_date",
+							"value": "2024-08-01"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "no parameters",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);   })",
+							"",
+							"",
+							"pm.test(\"Status code is OK\", function () {",
+							"    pm.response.to.have.status('OK')",
+							"})",
+							"pm.test(\"Status code is 200 or 201\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"})",
+							"pm.test('X-Ratelimit-Limit header exist', function (){",
+							"    pm.response.to.have.header('X-Ratelimit-Limit')",
+							"})",
+							"",
+							"pm.test('X-Ratelimit-Limit header has value true', function (){",
+							"    pm.expect(pm.response.headers.get('X-Ratelimit-Limit')).to.eql('4000')",
+							"})",
+							"",
+							"pm.test('JSON body has valid data', function (){",
+							"    const json = pm.response.json();",
+							"    pm.expect(json).to.be.an('object').that.is.not.empty;",
+							"    ",
+							"    // Validate properties of the response object",
+							"    pm.expect(json).to.have.property('copyright');",
+							"    pm.expect(json).to.have.property('date');",
+							"    pm.expect(json).to.have.property('title');",
+							"    pm.expect(json).to.have.property('url');",
+							"    pm.expect(json).to.have.property('media_type');",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "JzaeM8dMrWZzUG3ZdpLQa2epUNbO13aSFosayUY4",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_key",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://api.nasa.gov/planetary/apod",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nasa",
+						"gov"
+					],
+					"path": [
+						"planetary",
+						"apod"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "{{token}}",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "token",
+			"value": "JzaeM8dMrWZzUG3ZdpLQa2epUNbO13aSFosayUY4",
+			"type": "default"
+		}
+	]
+}
