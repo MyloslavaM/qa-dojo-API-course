@@ -18,7 +18,7 @@ jobs:
         run: npm ci
       - name: Run Postman collection
         run: echo "Add your Postman collection run command here"
-      - name: npm run test
+      - name: newman run postman/nasa.postman_collection.json -r htmlextra
         run: npx playwright test
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
